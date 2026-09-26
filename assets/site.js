@@ -108,7 +108,8 @@
         : hits.length ? form.getAttribute("data-count").replace("{n}", hits.length)
         : form.getAttribute("data-none").replace("{q}", q);
       out.innerHTML = hits.map(function (p) {
-        var pic = p.i ? '<img src="' + esc(p.i) + '" alt="" loading="lazy">' : "";
+        var pic = p.i ? '<img src="' + esc(p.i) + '" alt="" loading="lazy"' + (p.s ? ' class="sample"' : '') + '>' +
+          (p.s ? '<span class="sample-tag" aria-hidden="true">' + esc(form.getAttribute("data-sample")) + '</span>' : "") : "";
         return '<article class="card product-card"><a class="card-link" href="' + esc(p.u) + '">' +
           '<div class="tile">' + pic + '</div><div class="card-body"><h3>' + esc(p.t) + '</h3>' +
           '<p class="meta">' + esc(p.c) + '</p></div></a></article>';
