@@ -1,0 +1,68 @@
+{
+ "meat": {
+  "source": "https://unsplash.com/photos/Rs4O2IVTtTM",
+  "author": "engin akyurt",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "seafood": {
+  "source": "https://unsplash.com/photos/yZng5pXhoEQ",
+  "author": "Brett Jordan",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "produce": {
+  "source": "https://unsplash.com/photos/PM16-G2eVAs",
+  "author": "Zoshua Colah",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "produce-case": {
+  "source": "https://unsplash.com/photos/sn4P-PL79ow",
+  "author": "Hanz Dela Cruz",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "deli": {
+  "source": "https://unsplash.com/photos/Ood7H00R0Hc",
+  "author": "Takenori Okada",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "bakery": {
+  "source": "https://unsplash.com/photos/go3DT3PpIw4",
+  "author": "Yeh Xintong",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "processing": {
+  "source": "https://unsplash.com/photos/69xMOSSOgLI",
+  "author": "Holzke Men\u00fc Essen auf R\u00e4dern",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "meat-case": {
+  "source": "https://unsplash.com/photos/euHBBdntDvA",
+  "author": "S. Laiba Ali",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "scale": {
+  "source": "https://unsplash.com/photos/qnZz23CNNU4",
+  "author": "Minn Koko",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "aisle": {
+  "source": "https://unsplash.com/photos/Y3OTP6FwocA",
+  "author": "JEaLiFe Pictures",
+  "licence": "Unsplash License",
+  "licence_url": "https://unsplash.com/license"
+ },
+ "produce-aisle": {
+  "source": "https://www.pexels.com/video/34506452/",
+  "author": "JMT 35",
+  "licence": "Pexels License",
+  "licence_url": "https://www.pexels.com/license/"
+ }
+}

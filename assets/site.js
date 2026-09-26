@@ -38,6 +38,33 @@
     });
   }
 
+  // background video: plays only when visible and motion is welcome; always pausable
+  var band = document.querySelector("[data-video]");
+  if (band) {
+    var vid = band.querySelector("video");
+    var tog = band.querySelector(".video-toggle");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var userPaused = reduce;
+    var setState = function (paused) {
+      tog.setAttribute("aria-pressed", paused ? "true" : "false");
+      tog.setAttribute("aria-label", tog.getAttribute(paused ? "data-label-play" : "data-label-pause"));
+    };
+    setState(userPaused);
+    tog.addEventListener("click", function () {
+      userPaused = !vid.paused ? true : false;
+      if (userPaused) { vid.pause(); } else { vid.play().catch(function () {}); }
+      setState(userPaused);
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && !userPaused) { vid.play().catch(function () {}); }
+          else if (!en.isIntersecting) { vid.pause(); }
+        });
+      }, { threshold: 0.25 }).observe(band);
+    }
+  }
+
   // product gallery thumbnails
   document.querySelectorAll("[data-gallery]").forEach(function (g) {
     var main = g.querySelector(".main-img");
