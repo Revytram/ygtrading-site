@@ -65,6 +65,48 @@
     }
   }
 
+  // product photos: click to open a large view; click again to zoom in where you click
+  document.querySelectorAll("[data-gallery]").forEach(function (g) {
+    var main = g.querySelector(".main-img"), btn = g.querySelector("[data-zoom]");
+    if (!main || !btn) { return; }
+    var dlg = null;
+    function open() {
+      var src = main.getAttribute("data-full") || main.currentSrc || main.src;
+      if (typeof HTMLDialogElement !== "function") { window.open(src, "_blank"); return; }
+      if (!dlg) {
+        dlg = document.createElement("dialog");
+        dlg.className = "lightbox";
+        dlg.setAttribute("aria-label", btn.getAttribute("aria-label"));
+        dlg.innerHTML = '<div class="lb-frame"><img alt=""></div>' +
+          '<button type="button" class="lb-close">&times;</button>';
+        document.body.appendChild(dlg);
+        var frame = dlg.querySelector(".lb-frame"), im = dlg.querySelector("img");
+        var close = dlg.querySelector(".lb-close");
+        close.setAttribute("aria-label", btn.getAttribute("data-close"));
+        function origin(e) {
+          var r = frame.getBoundingClientRect();
+          var x = (e.clientX - r.left - im.offsetLeft) / im.offsetWidth * 100;
+          var y = (e.clientY - r.top - im.offsetTop) / im.offsetHeight * 100;
+          im.style.transformOrigin = Math.max(0, Math.min(100, x)) + "% " + Math.max(0, Math.min(100, y)) + "%";
+        }
+        im.addEventListener("click", function (e) { origin(e); dlg.classList.toggle("zoomed"); });
+        im.addEventListener("mousemove", function (e) { if (dlg.classList.contains("zoomed")) { origin(e); } });
+        close.addEventListener("click", function () { dlg.close(); });
+        dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target === frame) { dlg.close(); } });
+        dlg.addEventListener("close", function () { dlg.classList.remove("zoomed"); btn.focus(); });
+      }
+      var img = dlg.querySelector("img");
+      img.src = src;
+      img.alt = main.alt;
+      img.style.transformOrigin = "50% 50%";
+      dlg.querySelector(".lb-frame").classList.toggle("on-white", main.classList.contains("on-white"));
+      dlg.classList.remove("zoomed");
+      dlg.showModal();
+    }
+    btn.addEventListener("click", open);
+    main.addEventListener("click", open);
+  });
+
   // product gallery thumbnails
   document.querySelectorAll("[data-gallery]").forEach(function (g) {
     var main = g.querySelector(".main-img");
@@ -72,6 +114,7 @@
       b.addEventListener("click", function () {
         main.removeAttribute("srcset");
         main.src = b.getAttribute("data-src");
+        main.setAttribute("data-full", b.getAttribute("data-src"));
         // suppliers' photos are shot on white, the catalogue's on black
         main.classList.toggle("on-white", /\/(sup|gen)-/.test(b.getAttribute("data-src")));
         g.querySelectorAll(".thumbs button").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
