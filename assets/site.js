@@ -73,7 +73,7 @@
         main.removeAttribute("srcset");
         main.src = b.getAttribute("data-src");
         // suppliers' photos are shot on white, the catalogue's on black
-        main.classList.toggle("on-white", b.getAttribute("data-src").indexOf("/sup-") > -1);
+        main.classList.toggle("on-white", /\/(sup|gen)-/.test(b.getAttribute("data-src")));
         g.querySelectorAll(".thumbs button").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
         b.setAttribute("aria-pressed", "true");
       });
@@ -110,7 +110,7 @@
         : hits.length ? form.getAttribute("data-count").replace("{n}", hits.length)
         : form.getAttribute("data-none").replace("{q}", q);
       out.innerHTML = hits.map(function (p) {
-        var cls = p.s ? "sample" : (p.i && p.i.indexOf("/sup-") > -1 ? "on-white" : "");
+        var cls = p.s ? "sample" : (p.i && /\/(sup|gen)-/.test(p.i) ? "on-white" : "");
         var pic = p.i ? '<img src="' + esc(p.i) + '" alt="" loading="lazy"' + (cls ? ' class="' + cls + '"' : '') + '>' +
           (p.s ? '<span class="sample-tag" aria-hidden="true">' + esc(form.getAttribute("data-sample")) + '</span>' : "") : "";
         return '<article class="card product-card"><a class="card-link" href="' + esc(p.u) + '">' +
