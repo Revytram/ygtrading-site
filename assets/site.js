@@ -72,6 +72,8 @@
       b.addEventListener("click", function () {
         main.removeAttribute("srcset");
         main.src = b.getAttribute("data-src");
+        // suppliers' photos are shot on white, the catalogue's on black
+        main.classList.toggle("on-white", b.getAttribute("data-src").indexOf("/sup-") > -1);
         g.querySelectorAll(".thumbs button").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
         b.setAttribute("aria-pressed", "true");
       });
